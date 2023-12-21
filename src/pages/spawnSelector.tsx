@@ -5,19 +5,24 @@ import React from 'react';
 import { CharacterContext, ISpawns } from '../Spawn';
 import './spawnSelector.css';
 // import { Trigger } from '../../rage/triggers';
+import  { useNavigate } from 'react-router-dom';
 
 const FooterInteraction: React.FC<{ spawn?: ISpawns }> = ({ spawn }) => {
+
+  const navigate = useNavigate();
+
   return (
     <CharacterContext.Consumer>
       {
         character => (
           <div className='spawn_selector_container'>
-            <div className='bg1 center' onClick={ () => {
-              //@ts-ignore
-              character.emit(spawn);
-            } }>
+            <div className='bg1 center'>
               <div className='circle center'>
-                <div className='circle-home center'>
+                <div className='circle-home center' onClick={ () => {
+                  //@ts-ignore
+                  character.emit('house');
+                  navigate('/character');
+                } }>
                   <img src='/imgs/home.png' width='50%'></img>
                 </div>
               </div>
@@ -33,6 +38,7 @@ const FooterInteraction: React.FC<{ spawn?: ISpawns }> = ({ spawn }) => {
             <div className='bg2 center' onClick={ () => {
               //@ts-ignore
               character.emit(spawn);
+              navigate('/character');
             } }>
               <div className='circle center'>
                 <div className='circle-pos center'>
@@ -46,11 +52,12 @@ const FooterInteraction: React.FC<{ spawn?: ISpawns }> = ({ spawn }) => {
                 </p>
               </div>
             </div>
-            <div className='bg3 center' onClick={ () => {
-              //@ts-ignore
-              character.emit(spawn);
-            } }>
-              <div className='circle center'>
+            <div className='bg3 center'>
+              <div className='circle center' onClick={ () => {
+                //@ts-ignore
+                character.emit(spawn);
+                navigate('/character');
+              } }>
                 <div className='circle-other center'>
                   <img src='/imgs/other.svg' width='50%'></img>
                 </div>
